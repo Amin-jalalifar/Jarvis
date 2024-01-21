@@ -46,8 +46,8 @@ class Activator:
     See Also:
         - Creates an input audio stream from a microphone, monitors it, and detects the specified wake word.
         - Once detected, Jarvis triggers the ``listener.listen()`` function with an ``acknowledgement`` sound played.
-        - After processing the phrase, the converted text is sent as response to ``initiator()`` with a ``return`` flag.
-        - The ``should_return`` flag ensures, the user is not disturbed when accidentally woke up by wake work engine.
+        - After processing the phrase, the converted text is sent as a response to ``initiator()`` with a ``return`` flag.
+        - The ``should_return`` flag ensures the user is not disturbed when accidentally woken up by the wake word engine.
     """
 
     def __init__(self):
@@ -102,7 +102,7 @@ class Activator:
         )
 
     def executor(self) -> None:
-        """Calls the listener for actionable phrase and runs the speaker node for response."""
+        """Calls the listener for an actionable phrase and runs the speaker node for a response."""
         logger.debug("Wake word detected at %s", datetime.now().strftime('%c'))
         if listener_controls.get_listener_state():
             playsound(sound=models.indicators.acknowledgement, block=False)
@@ -160,7 +160,7 @@ class Activator:
         See Also:
             - Terminates/Kills all the background processes.
             - Releases resources held by porcupine.
-            - Closes audio stream.
+            - Closes the audio stream.
             - Releases port audio resources.
         """
         if not models.settings.limited:
@@ -177,7 +177,7 @@ class Activator:
 
 
 def start() -> None:
-    """Starts main process to activate Jarvis after checking internet connection and initiating background processes."""
+    """Starts the main process to activate Jarvis after checking internet connection and initiating background processes."""
     logger.info("Current Process ID: %d", models.settings.pid)
     controls.starter()
     if internet.ip_address() and internet.public_ip_info():
